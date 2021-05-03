@@ -24,7 +24,7 @@ namespace GearShare.Models
         
         [DisplayName("Purchased")]
         [DataType(DataType.Date)]
-        public DateTime PurchaseDate { get; set; }
+        public DateTime? PurchaseDate { get; set; }
         
         public bool IsPublic { get; set; }
         
