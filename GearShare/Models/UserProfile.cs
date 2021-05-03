@@ -34,9 +34,6 @@ namespace GearShare.Models
         [MaxLength(255)]
         public string ImageLocation { get; set; }
 
-        [Required]
-        public int UserTypeId { get; set; }
-
         public string FullName
         {
             get
@@ -45,8 +42,6 @@ namespace GearShare.Models
             }
         }
 
-        public List<UserProfile> UserProfiles { get; set; }
 
-        public bool Deactivated { get; set; }
     }
 }
