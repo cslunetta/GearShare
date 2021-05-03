@@ -78,64 +78,8 @@ export function UserProfileProvider(props) {
       }).then(resp => resp.json()));
   };
 
-  const getAllProfiles = () => {
-    return getToken().then((token) => {
-      return fetch(apiUrl, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-        .then((res) => res.json())
-    })
-  }
-
-  const deactivateUserById = (id) => {
-    return getToken().then((token) =>
-      fetch(`${apiUrl}/DeactivateUserById/${id}`, {
-        method: "PUT",
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-    )
-  }
-
-  const getUserProfileById = (id) => {
-    return getToken().then((token) =>
-      fetch(`${apiUrl}/GetUserProfileById/${id}`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      }).then((res) => res.json())
-    )
-  }
-
-  const getDeactivatedUserProfiles = () => {
-    return getToken().then((token) =>
-      fetch(`${apiUrl}/GetDeactivatedUserProfiles`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      }).then((res) => res.json())
-    )
-  }
-
-  const reactivateUserById = (id) => {
-    return getToken().then((token) =>
-      fetch(`${apiUrl}/ReactivateUserById/${id}`, {
-        method: "PUT",
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-    )
-  }
-
   return (
-    <UserProfileContext.Provider value={{ isLoggedIn, login, logout, register, getToken, getUserProfile, getAllProfiles, deactivateUserById, getUserProfileById, getDeactivatedUserProfiles, reactivateUserById }}>
+    <UserProfileContext.Provider value={{ isLoggedIn, login, logout, register, getToken, getUserProfile }}>
       {isFirebaseReady
         ? props.children
         : <Spinner className="app-spinner dark"/>}
