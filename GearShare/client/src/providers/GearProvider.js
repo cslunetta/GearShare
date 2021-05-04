@@ -32,7 +32,19 @@ export const GearProvider = (props) => {
             .then(setGear)
         );
     };
-    // const getGearById
+
+    const getGearById = (id) => {
+        return getToken().then((token) =>
+            fetch(`${apiUrl}/${id}`, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+                .then((res) => res.json())
+        );
+    };
+
     // const addGear
     // const updateGear
     // const deleteGear
@@ -41,9 +53,10 @@ export const GearProvider = (props) => {
         <GearContext.Provider
             value={{
                 gear,
+                setGear,
                 getAllPublicGear,
                 getCurrentUsersGear,
-                // getGearById,
+                getGearById,
                 // addGear,
                 // updateGear,
                 // deleteGear,
