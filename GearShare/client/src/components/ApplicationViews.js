@@ -5,6 +5,7 @@ import Login from "./Login";
 import Register from "./Register";
 import GearList from "./gear/GearList";
 import { GearProvider } from "../providers/GearProvider";
+import MyGearList from "./gear/MyGearList";
 
 export default function ApplicationViews() {
     const { isLoggedIn } = useContext(UserProfileContext);
@@ -32,7 +33,7 @@ export default function ApplicationViews() {
 
                 <GearProvider>
                     <Route path="/mygear">
-                        <GearList />
+                        <MyGearList />
                     </Route>
                 </GearProvider>
             </Switch>
