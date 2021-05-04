@@ -256,6 +256,7 @@ namespace GearShare.Repositories
                     Id = DbUtils.GetInt(reader, "UserProfileId"),
                     FirstName = DbUtils.GetString(reader, "FirstName"),
                     LastName = DbUtils.GetString(reader, "LastName"),
+                    DisplayName = DbUtils.GetString(reader, "DisplayName"),
                     Email = DbUtils.GetString(reader, "Email"),
                     CreateDateTime = DbUtils.GetDateTime(reader, "CreateDateTime"),
                     ImageLocation = DbUtils.GetString(reader, "ProfileImage")
