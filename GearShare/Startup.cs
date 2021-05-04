@@ -42,6 +42,7 @@ namespace GearShare
             // Register Repositories with ASP.NET
             services.AddTransient<IUserProfileRepository, UserProfileRepository>();
             services.AddTransient<IGearRepository, GearRepository>();
+            services.AddTransient<ICategoryRepository, CategoryRepository>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
