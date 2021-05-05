@@ -39,6 +39,15 @@ namespace GearShare.Controllers
 
             return Ok(gear);
         }
+
+        [HttpGet("GetGearByCurrentUserId")]
+        public IActionResult GetGearByCurrentUserId()
+        {
+            var currentUserProfile = GetCurrentProfile();
+            var gear = _gearRepository.GetCurrentUsersGear(currentUserProfile.Id);
+
+            return Ok(gear);
+        }
         
         [HttpGet("{id}")]
         public IActionResult Get(int id)

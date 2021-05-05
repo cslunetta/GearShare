@@ -21,9 +21,9 @@ export const GearProvider = (props) => {
         );
     };
 
-    const getCurrentUsersGear = (id) => {
+    const getCurrentUsersGear = () => {
         return getToken().then((token) =>
-            fetch(`${apiUrl}/GetGearByUserId?id=${id}`, {
+            fetch(`${apiUrl}/GetGearByCurrentUserId`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`,

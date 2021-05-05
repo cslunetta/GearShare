@@ -8,9 +8,29 @@ const GearDetails = () => {
     const [gear, setGear] = useState([]);
     const { id } = useParams();
 
+    const currentUser = JSON.parse(sessionStorage.getItem("userProfile"));
+
     useEffect(() => {
         getGearById(id).then(setGear);
     }, []);
+
+    const DetailButtons = () => {
+        if (currentUser.id === gear.userProfileId) {
+            return (
+                <>
+                    <Button>Edit</Button>
+                    <Button>Make Private</Button>
+                    <Button>Delete</Button>
+                </>
+            );
+        } else {
+            return (
+                <>
+                    <Button>Request</Button>
+                </>
+            )
+        }
+    };
 
     return (
         <Container>
@@ -50,7 +70,7 @@ const GearDetails = () => {
             <Row>
                 <Col></Col>
                 <Col>
-                    <Button>Request</Button>
+                    <DetailButtons />
                 </Col>
             </Row>
         </Container>

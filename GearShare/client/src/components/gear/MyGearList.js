@@ -6,12 +6,10 @@ import Gear from "./Gear";
 
 const MyGearList = () => {
     const { gear, getCurrentUsersGear } = useContext(GearContext);
-    const currentUser = JSON.parse(sessionStorage.getItem("userProfile"));
-    const id = currentUser.id;
     const history = useHistory();
 
     useEffect(() => {
-        getCurrentUsersGear(id);
+        getCurrentUsersGear();
     }, []);
 
     return (
