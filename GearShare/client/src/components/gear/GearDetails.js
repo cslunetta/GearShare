@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useHistory, useParams } from "react-router";
 import { Col, Container, Row, Button } from "reactstrap";
 import { GearContext } from "../../providers/GearProvider";
 
@@ -7,10 +7,31 @@ const GearDetails = () => {
     const { getGearById } = useContext(GearContext);
     const [gear, setGear] = useState([]);
     const { id } = useParams();
+    const history = useHistory()
+
+    const currentUser = JSON.parse(sessionStorage.getItem("userProfile"));
 
     useEffect(() => {
         getGearById(id).then(setGear);
     }, []);
+
+    const DetailButtons = () => {
+        if (currentUser.id === gear.userProfileId) {
+            return (
+                <>
+                    <Button onClick={() => history.push(`/mygear/edit/${id}`)}>Edit</Button>
+                    <Button>Make Private</Button>
+                    <Button>Delete</Button>
+                </>
+            );
+        } else {
+            return (
+                <>
+                    <Button>Request</Button>
+                </>
+            )
+        }
+    };
 
     return (
         <Container>
@@ -50,7 +71,7 @@ const GearDetails = () => {
             <Row>
                 <Col></Col>
                 <Col>
-                    <Button>Request</Button>
+                    <DetailButtons />
                 </Col>
             </Row>
         </Container>

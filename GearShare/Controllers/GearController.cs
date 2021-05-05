@@ -39,6 +39,15 @@ namespace GearShare.Controllers
 
             return Ok(gear);
         }
+
+        [HttpGet("GetGearByCurrentUserId")]
+        public IActionResult GetGearByCurrentUserId()
+        {
+            var currentUserProfile = GetCurrentProfile();
+            var gear = _gearRepository.GetCurrentUsersGear(currentUserProfile.Id);
+
+            return Ok(gear);
+        }
         
         [HttpGet("{id}")]
         public IActionResult Get(int id)
@@ -61,6 +70,15 @@ namespace GearShare.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(int id, Gear gear)
         {
+            var currentUserProfile = GetCurrentProfile();
+            if (id != gear.Id)
+            {
+                return BadRequest();
+            }
+            if (currentUserProfile.Id != gear.UserProfileId)
+            {
+                return Unauthorized();
+            }
             _gearRepository.UpdateGear(gear);
             return NoContent();
         }
