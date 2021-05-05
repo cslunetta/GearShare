@@ -7,6 +7,8 @@ import GearList from "./gear/GearList";
 import { GearProvider } from "../providers/GearProvider";
 import MyGearList from "./gear/MyGearList";
 import GearDetails from "./gear/GearDetails";
+import GearForm from "./gear/GearForm";
+import { CategoryProvider } from "../providers/CategoryProvider";
 
 export default function ApplicationViews() {
     const { isLoggedIn } = useContext(UserProfileContext);
@@ -33,14 +35,23 @@ export default function ApplicationViews() {
                 </Route>
 
                 <GearProvider>
-                    <Route path="/mygear">
+                    <Route path="/mygear" exact>
                         <MyGearList />
                     </Route>
 
                     <Route path={`/geardetails/:id`}>
                         <GearDetails />
                     </Route>
-                    
+
+                    <CategoryProvider>
+                        <Route path="/mygear/Create">
+                            <GearForm />
+                        </Route>
+
+                        <Route path={`/mygear/edit/:gearId`}>
+                            <GearForm />
+                        </Route>
+                    </CategoryProvider>
                 </GearProvider>
             </Switch>
         </main>

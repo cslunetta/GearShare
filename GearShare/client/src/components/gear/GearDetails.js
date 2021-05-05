@@ -5,7 +5,7 @@ import { GearContext } from "../../providers/GearProvider";
 
 const GearDetails = () => {
     const { getGearById } = useContext(GearContext);
-    const [ gear, setGear ] = useState([]);
+    const [gear, setGear] = useState([]);
     const { id } = useParams();
 
     useEffect(() => {
@@ -28,22 +28,20 @@ const GearDetails = () => {
             </Row>
             <Row>
                 <Col>
-                {gear.imageLocation ? (
-                <img
-                    top
-                    width="100%"
-                    src={gear.imageLocation}
-                    alt={gear.name}
-                />
-            ) : (
-                <img
-                    top
-                    width="100%"
-                    src="https://c.pxhere.com/photos/a6/59/guitar_music_amplifier_ibanez_instrument-103814.jpg!d"
-                    srcset="https://c.pxhere.com/photos/a6/59/guitar_music_amplifier_ibanez_instrument-103814.jpg!d"
-                    alt="music, white, guitar, color, instrument, blue, amplifier, electronics, ibanez, Free Images In PxHere"
-                />
-            )}
+                    {gear.imageLocation ? (
+                        <img
+                            width="100%"
+                            src={gear.imageLocation}
+                            alt={gear.name}
+                        />
+                    ) : (
+                        <img
+                            width="100%"
+                            src="https://c.pxhere.com/photos/a6/59/guitar_music_amplifier_ibanez_instrument-103814.jpg!d"
+                            srcSet="https://c.pxhere.com/photos/a6/59/guitar_music_amplifier_ibanez_instrument-103814.jpg!d"
+                            alt="music, white, guitar, color, instrument, blue, amplifier, electronics, ibanez, Free Images In PxHere"
+                        />
+                    )}
                 </Col>
                 <Col>
                     <p>{gear.description}</p>
