@@ -28,8 +28,9 @@ export const GearProvider = (props) => {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
-            }).then((res) => res.json())
-            .then(setGear)
+            })
+                .then((res) => res.json())
+                .then(setGear)
         );
     };
 
@@ -40,13 +41,36 @@ export const GearProvider = (props) => {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
-            })
-                .then((res) => res.json())
+            }).then((res) => res.json())
         );
     };
 
-    // const addGear
-    // const updateGear
+    const addGear = (gear) => {
+        return getToken().then((token) =>
+            fetch(`${apiUrl}`, {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(gear),
+            }).then((res) => res.json())
+        );
+    };
+
+    const updateGear = (gear) => {
+        return getToken().then((token) =>
+            fetch(`${apiUrl}`, {
+                method: "PUT",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(gear),
+            }).then(getCurrentUsersGear)
+        );
+    };
+
     // const deleteGear
 
     return (
@@ -57,8 +81,8 @@ export const GearProvider = (props) => {
                 getAllPublicGear,
                 getCurrentUsersGear,
                 getGearById,
-                // addGear,
-                // updateGear,
+                addGear,
+                updateGear,
                 // deleteGear,
             }}
         >

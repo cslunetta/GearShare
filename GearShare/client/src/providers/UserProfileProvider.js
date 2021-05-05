@@ -34,7 +34,7 @@ export function UserProfileProvider(props) {
       .then(() => {
         sessionStorage.clear()
         setIsLoggedIn(false);
-      }).then(history.push('/'));
+      }).then(history.push('/Login'));
   };
 
   const register = (userProfile, password) => {

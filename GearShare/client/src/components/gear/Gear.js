@@ -11,6 +11,10 @@ import {
 const Gear = ({ gear }) => {
     return (
         <Card className="m-4">
+            
+            {/*
+            CSS for darkening an image on hover effect to give the user the feel of a button they can click on.
+            https://codepen.io/VectorQuanity/pen/qEeJoK */}
             <Link className="picLink" to={`/geardetails/${gear.id}`}>
                 {gear.imageLocation ? (
                     <CardImg
@@ -24,7 +28,7 @@ const Gear = ({ gear }) => {
                         top
                         width="100%"
                         src="https://c.pxhere.com/photos/a6/59/guitar_music_amplifier_ibanez_instrument-103814.jpg!d"
-                        srcset="https://c.pxhere.com/photos/a6/59/guitar_music_amplifier_ibanez_instrument-103814.jpg!d"
+                        srcSet="https://c.pxhere.com/photos/a6/59/guitar_music_amplifier_ibanez_instrument-103814.jpg!d"
                         alt="music, white, guitar, color, instrument, blue, amplifier, electronics, ibanez, Free Images In PxHere"
                     />
                 )}

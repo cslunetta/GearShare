@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace GearShare.Controllers
@@ -16,9 +17,11 @@ namespace GearShare.Controllers
     public class GearController : ControllerBase
     {
         private readonly IGearRepository _gearRepository;
-        public GearController(IGearRepository gearRepository)
+        private readonly IUserProfileRepository _userProfileRepository;
+        public GearController(IGearRepository gearRepository, IUserProfileRepository userProfileRepository)
         {
             _gearRepository = gearRepository;
+            _userProfileRepository = userProfileRepository;
         }
 
         [HttpGet]
@@ -48,6 +51,8 @@ namespace GearShare.Controllers
         [HttpPost]
         public IActionResult Post(Gear gear)
         {
+            var currentUserProfile = GetCurrentProfile();
+            gear.UserProfileId = currentUserProfile.Id;
             gear.CreateDateTime = DateTime.Now;
             _gearRepository.AddGear(gear);
             return CreatedAtAction("Get", new { id = gear.Id }, gear);
@@ -67,5 +72,10 @@ namespace GearShare.Controllers
             return NoContent();
         }
 
+        private UserProfile GetCurrentProfile()
+        {
+            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            return _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
+        }
     }
 }
