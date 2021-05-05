@@ -60,7 +60,7 @@ export const GearProvider = (props) => {
 
     const updateGear = (gear) => {
         return getToken().then((token) =>
-            fetch(`${apiUrl}`, {
+            fetch(`${apiUrl}/${gear.id}`, {
                 method: "PUT",
                 headers: {
                     Authorization: `Bearer ${token}`,

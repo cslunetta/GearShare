@@ -47,14 +47,16 @@ const GearForm = () => {
             setIsLoading(true);
             if (gearId) {
                 updateGear({
-                    id: gear.id,
                     name: gear.name,
-                    categoryId: parseInt(gear.categoryId),
-                    isPublic: Boolean(gear.isPublic),
                     description: gear.description,
-                    purchaseDate: gear.purchaseDate,
                     imageLocation: gear.imageLocation,
-                }).then(() => history.push(`/geardetail/${gear.id}`));
+                    createDateTime: gear.createDateTime,
+                    purchaseDate: gear.purchaseDate,
+                    isPublic: Boolean(gear.isPublic),
+                    categoryId: parseInt(gear.categoryId),
+                    userProfileId: gear.userProfileId,
+                    id: gear.id,
+                }).then(() => history.push(`/geardetails/${gear.id}`));
             } else {
                 addGear({
                     name: gear.name,
@@ -184,7 +186,7 @@ const GearForm = () => {
                                     id="purchaseDate"
                                     onChange={handleControlledInputChange}
                                     className="form-control"
-                                    value={gear.purchaseDate}
+                                    value={gear.purchaseDate.split("T")[0]}
                                 />
                             </FormGroup>
                             <FormGroup>
@@ -207,7 +209,7 @@ const GearForm = () => {
                                     handleSave();
                                 }}
                             >
-                                {gearId ? "Edit" : "Add"}
+                                {gearId ? "Save" : "Add"}
                             </Button>
                         </fieldset>
                     </Form>

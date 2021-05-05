@@ -70,6 +70,15 @@ namespace GearShare.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(int id, Gear gear)
         {
+            var currentUserProfile = GetCurrentProfile();
+            if (id != gear.Id)
+            {
+                return BadRequest();
+            }
+            if (currentUserProfile.Id != gear.UserProfileId)
+            {
+                return Unauthorized();
+            }
             _gearRepository.UpdateGear(gear);
             return NoContent();
         }
