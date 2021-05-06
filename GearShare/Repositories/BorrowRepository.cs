@@ -22,16 +22,16 @@ namespace GearShare.Repositories
                 {
                     cmd.CommandText = @"
                         INSERT INTO Borrow (
-                                    StatusId, UserProfileId, GearId, StartDate, EndDate)
+                                    UserProfileId, GearId, StartDate)
                         OUTPUT INSERTED.ID
                         VALUES (
-                                    @StatusId, @UserProfileId, @GearId, @StartDate, @EndDate)";
+                                    @StatusId, @UserProfileId, @GearId, @StartDate)";
 
                     DbUtils.AddParameter(cmd, "@StatusId", borrow.StatusId);
                     DbUtils.AddParameter(cmd, "@UserProfileId", borrow.UserProfileId);
                     DbUtils.AddParameter(cmd, "@GearId", borrow.GearId);
                     DbUtils.AddParameter(cmd, "@StartDate", borrow.StartDate);
-                    DbUtils.AddParameter(cmd, "@EndDate", borrow.EndDate);
+                    //DbUtils.AddParameter(cmd, "@EndDate", DbUtils.ValueOrDBNull(borrow.EndDate));
 
                     return borrow.Id = (int)cmd.ExecuteScalar();
                 }
@@ -121,7 +121,20 @@ namespace GearShare.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"";
+                    cmd.CommandText = @"
+                        SELECT  b.Id, b.StatusId, b.UserProfileId AS RequestingUser, b.GearId, b.StartDate, b.EndDate,
+                                
+                                g.Id AS GearId, g.[Name] AS GearName, g.Description, g.ImageLocation, 
+                                g.CreateDateTime AS GearCreateDate, g.PurchaseDate, g.IsPublic, g.CategoryId, g.UserProfileId AS GearOwner,
+                                
+                                c.[name] AS CategoryName, 
+                                
+                                u.FirstName, u.LastName, u.DisplayName, u.Email, u.CreateDateTime, u.ImageLocation AS ProfileImage
+                         FROM   Borrow b
+                                LEFT JOIN Gear g ON b.GearId = g.Id
+                                LEFT JOIN Category c ON g.CategoryId = c.Id
+                                LEFT JOIN UserProfile u ON g.UserProfileId = u.Id
+                        WHERE   b.Id = @Id";
 
                     DbUtils.AddParameter(cmd, "@Id", id);
 

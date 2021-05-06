@@ -39,7 +39,7 @@ CREATE TABLE [Gear] (
   [Name] nvarchar(255) NOT NULL,
   [Description] text NOT NULL,
   [ImageLocation] nvarchar(255),
-  [CreateDateTime] datetime NOT NULL,
+  [CreateDateTime] datetime NOT NULL DEFAULT getdate(),
   [PurchaseDate] date,
   [IsPublic] bit NOT NULL,
   [CategoryId] integer NOT NULL,
@@ -56,11 +56,11 @@ CREATE TABLE [Status] (
 
 CREATE TABLE [Borrow] (
   [Id] integer PRIMARY KEY IDENTITY,
-  [StatusId] integer NOT NULL,
+  [StatusId] integer DEFAULT NULL,
   [UserProfileId] integer NOT NULL,
   [GearId] integer NOT NULL,
   [StartDate] datetime,
-  [EndDate] datetime,
+  [EndDate] datetime DEFAULT NULL,
   
   CONSTRAINT [FK_Borrow_Status] FOREIGN KEY ([StatusId]) REFERENCES [Status] ([Id]),
   CONSTRAINT [FK_Borrow_UserProfile] FOREIGN KEY ([UserProfileId]) REFERENCES [UserProfile] ([Id]),

@@ -56,6 +56,8 @@ namespace GearShare.Controllers
         {
             var currentUserProfile = GetCurrentProfile();
             borrow.UserProfileId = currentUserProfile.Id;
+            borrow.StartDate = DateTime.Now;
+            borrow.StatusId = 0;
             _borrowRepository.AddBorrow(borrow);
             return CreatedAtAction("Get", new { id = borrow.Id }, borrow);
         }

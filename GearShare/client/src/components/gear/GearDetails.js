@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import { Col, Container, Row, Button } from "reactstrap";
+import { BorrowContext } from "../../providers/BorrowProvider";
 import { GearContext } from "../../providers/GearProvider";
 
 const GearDetails = () => {
@@ -8,6 +9,12 @@ const GearDetails = () => {
         GearContext
     );
     const [gear, setGear] = useState([]);
+
+    const { addBorrowed, getBorrowById } = useContext(BorrowContext);
+    const [borrow, setBorrow] = useState({
+        gearId: 0,
+    });
+
     const { id } = useParams();
     const history = useHistory();
 
@@ -15,6 +22,12 @@ const GearDetails = () => {
 
     useEffect(() => {
         getGearById(id).then(setGear);
+    }, []);
+
+    useEffect(() => {
+        if (borrow === null) {
+            getBorrowById(id).then(setBorrow);
+        }
     }, []);
 
     const DetailButtons = () => {
@@ -30,7 +43,11 @@ const GearDetails = () => {
         } else {
             return (
                 <>
-                    <Button>Request</Button>
+                    {borrow.gearId ? (
+                        <Button disabled>Requested</Button>
+                    ) : (
+                        <Button onClick={handleBorrowRequest}>Request</Button>
+                    )}
                 </>
             );
         }
@@ -40,6 +57,14 @@ const GearDetails = () => {
         if (window.confirm(`Are you sure you want to delete ${gear.name}?`)) {
             deleteGear(gear.id).then(getCurrentUsersGear);
             history.push("/mygear");
+        }
+    };
+
+    const handleBorrowRequest = () => {
+        if (window.confirm(`Confirm request for ${gear.name}`)) {
+            addBorrowed({
+                gearId: gear.id,
+            });
         }
     };
 
