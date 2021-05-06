@@ -71,11 +71,12 @@ namespace GearShare.Controllers
         public IActionResult Put(int id, Gear gear)
         {
             var currentUserProfile = GetCurrentProfile();
+            var currentGear =_gearRepository.GetGearById(id);
             if (id != gear.Id)
             {
                 return BadRequest();
             }
-            if (currentUserProfile.Id != gear.UserProfileId)
+            if (currentUserProfile.Id != currentGear.UserProfileId)
             {
                 return Unauthorized();
             }
@@ -86,6 +87,12 @@ namespace GearShare.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
+            var gear = _gearRepository.GetGearById(id);
+            var currentUserProfile = GetCurrentProfile();
+            if (gear.UserProfileId != currentUserProfile.Id)
+            { 
+                return Unauthorized();
+            }
             _gearRepository.DeleteGear(id);
             return NoContent();
         }

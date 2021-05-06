@@ -23,11 +23,12 @@ const GearForm = () => {
     const [gear, setGear] = useState({
         name: "",
         categoryId: 0,
-        isPublic: "",
+        isPublic: Boolean,
         description: "",
         purchaseDate: "",
         imageLocation: "",
     });
+    console.log(gear)
 
     const [isLoading, setIsLoading] = useState(true);
 
@@ -76,6 +77,7 @@ const GearForm = () => {
                 getGearById(gearId).then((gear) => {
                     setGear(gear);
                     setIsLoading(false);
+                    console.log(gear)
                 });
             } else {
                 setIsLoading(false);
@@ -145,7 +147,7 @@ const GearForm = () => {
                                 </Col>
                                 <Col>
                                     <FormGroup>
-                                        <Label for="isPublic">Status: </Label>
+                                        <Label for="isPublic">{gearId ? (gear.isPublic ? "Current Status: Public" : "Private") : "Status: "}</Label>
                                         <Input
                                             type="select"
                                             id="isPublic"
@@ -154,12 +156,13 @@ const GearForm = () => {
                                             }
                                             required
                                             className="form-control"
-                                            value={gear.isPublic}
+                                            value={`${gear.isPublic}`}
                                         >
-                                            <option name="1" value={true}>
+                                            <option>Privacy Options...</option>
+                                            <option name="1" value="true">
                                                 Public
                                             </option>
-                                            <option name="2" value={false}>
+                                            <option name="0" id="isPublic" value="">
                                                 Private
                                             </option>
                                         </Input>
