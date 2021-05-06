@@ -114,6 +114,31 @@ namespace GearShare.Repositories
             }
         }
 
+        public Borrow GetBorrowById(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"";
+
+                    DbUtils.AddParameter(cmd, "@Id", id);
+
+                    var reader = cmd.ExecuteReader();
+                    Borrow borrow = null;
+
+                    if (reader.Read())
+                    {
+                        borrow = NewBorrowFromReader(reader);
+                    }
+
+                    reader.Close();
+                    return borrow;
+                }
+            }
+        }
+
         public void UpdateBorrowed(Borrow borrow)
         {
             using (var conn = Connection)

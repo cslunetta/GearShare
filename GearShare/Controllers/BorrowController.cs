@@ -43,9 +43,39 @@ namespace GearShare.Controllers
             return Ok(borrow);
         }
 
-        //post
+        [HttpGet("{id}")]
+        public IActionResult GetBorrowById(int id)
+        {
+            var borrow = _borrowRepository.GetBorrowById(id);
 
-        //put
+            return Ok(borrow);
+        }
+
+        [HttpPost]
+        public IActionResult Post(Borrow borrow)
+        {
+            var currentUserProfile = GetCurrentProfile();
+            borrow.UserProfileId = currentUserProfile.Id;
+            _borrowRepository.AddBorrow(borrow);
+            return CreatedAtAction("Get", new { id = borrow.Id }, borrow);
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, Borrow borrow)
+        {
+            var currentUserProfile = GetCurrentProfile();
+            var currentBorrow = _borrowRepository.GetBorrowById(id);
+            if (id != borrow.Id)
+            {
+                return BadRequest();
+            }
+            if (currentUserProfile.Id != currentBorrow.UserProfileId)
+            {
+                return Unauthorized();
+            }
+            _borrowRepository.UpdateBorrowed(borrow);
+            return NoContent();
+        }
 
         private UserProfile GetCurrentProfile()
         {
