@@ -59,6 +59,7 @@ export const GearProvider = (props) => {
     };
 
     const updateGear = (gear) => {
+        console.log(gear)
         return getToken().then((token) =>
             fetch(`${apiUrl}/${gear.id}`, {
                 method: "PUT",
@@ -71,7 +72,16 @@ export const GearProvider = (props) => {
         );
     };
 
-    // const deleteGear
+    const deleteGear = (id) => {
+        return getToken().then((token) =>
+            fetch(`${apiUrl}/${id}`, {
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+        );
+    };
 
     return (
         <GearContext.Provider
@@ -83,7 +93,7 @@ export const GearProvider = (props) => {
                 getGearById,
                 addGear,
                 updateGear,
-                // deleteGear,
+                deleteGear,
             }}
         >
             {props.children}
