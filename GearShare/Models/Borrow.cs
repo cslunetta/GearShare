@@ -12,7 +12,7 @@ namespace GearShare.Models
         public int Id { get; set; }
 
         [DisplayName("Status")]
-        public int StatusId { get; set; }
+        public int? StatusId { get; set; }
         public Status Status { get; set; }
         
         [Required]
@@ -28,6 +28,6 @@ namespace GearShare.Models
         [DataType(DataType.Date)]
         public DateTime StartDate { get; set; }
         [DataType(DataType.Date)]
-        public DateTime EndDate { get; set; }
+        public DateTime? EndDate { get; set; }
     }
 }

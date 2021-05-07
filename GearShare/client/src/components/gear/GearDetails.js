@@ -10,9 +10,9 @@ const GearDetails = () => {
     );
     const [gear, setGear] = useState([]);
 
-    const { addBorrowed, getBorrowById } = useContext(BorrowContext);
+    const { addBorrowed, GetBorrowByGearIdForCurrentUser } = useContext(BorrowContext);
     const [borrow, setBorrow] = useState({
-        gearId: 0,
+        id: 0,
     });
 
     const { id } = useParams();
@@ -25,9 +25,7 @@ const GearDetails = () => {
     }, []);
 
     useEffect(() => {
-        if (borrow === null) {
-            getBorrowById(id).then(setBorrow);
-        }
+        GetBorrowByGearIdForCurrentUser(id).then(setBorrow);
     }, []);
 
     const DetailButtons = () => {
@@ -43,7 +41,7 @@ const GearDetails = () => {
         } else {
             return (
                 <>
-                    {borrow.gearId ? (
+                    {borrow ? (
                         <Button disabled>Requested</Button>
                     ) : (
                         <Button onClick={handleBorrowRequest}>Request</Button>
@@ -64,7 +62,7 @@ const GearDetails = () => {
         if (window.confirm(`Confirm request for ${gear.name}`)) {
             addBorrowed({
                 gearId: gear.id,
-            });
+            }).then(setBorrow);
         }
     };
 

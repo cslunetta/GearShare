@@ -56,7 +56,7 @@ CREATE TABLE [Status] (
 
 CREATE TABLE [Borrow] (
   [Id] integer PRIMARY KEY IDENTITY,
-  [StatusId] integer DEFAULT NULL,
+  [StatusId] integer,
   [UserProfileId] integer NOT NULL,
   [GearId] integer NOT NULL,
   [StartDate] datetime,

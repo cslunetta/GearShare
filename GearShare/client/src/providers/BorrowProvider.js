@@ -19,6 +19,18 @@ export const BorrowProvider = (props) => {
         );
     };
 
+    const GetBorrowByGearIdForCurrentUser = (id) => {
+        return getToken().then((token) =>
+            fetch(`${apiUrl}/gearId/${id}`, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }).then((res) => res.json()).then((res) => console.log(res))
+        );
+    };
+
+    // get a list of items by user id of the gear itself.
     const getAllBorrowedByGearCurrentUser = () => {
         return getToken().then((token) =>
             fetch(`${apiUrl}/GetAllBorrowedByGearUserId`, {
@@ -32,6 +44,7 @@ export const BorrowProvider = (props) => {
         );
     };
 
+    // get a list of items borrowed by the current user
     const getCurrentUsersBorrowed = () => {
         return getToken().then((token) =>
             fetch(`${apiUrl}/GetCurrentUsersBorrowed`, {
@@ -54,7 +67,8 @@ export const BorrowProvider = (props) => {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(borrow),
-            }).then((res) => res.json())
+            })
+            // .then((res) => res.json())
         );
     };
 
@@ -77,6 +91,7 @@ export const BorrowProvider = (props) => {
                 borrow,
                 setBorrow,
                 getBorrowById,
+                GetBorrowByGearIdForCurrentUser,
                 getAllBorrowedByGearCurrentUser,
                 getCurrentUsersBorrowed,
                 addBorrowed,

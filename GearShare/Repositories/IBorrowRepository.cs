@@ -10,5 +10,6 @@ namespace GearShare.Repositories
         List<Borrow> GetAllBorrowedByGearUserId(int UserProfileId);
         void UpdateBorrowed(Borrow borrow);
         Borrow GetBorrowById(int id);
+        Borrow GetBorrowByGearId(int id, int UserProfileId);
     }
 }

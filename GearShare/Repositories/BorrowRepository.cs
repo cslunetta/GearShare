@@ -152,6 +152,45 @@ namespace GearShare.Repositories
             }
         }
 
+        public Borrow GetBorrowByGearId(int id, int userProfileId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT  b.Id, b.StatusId, b.UserProfileId AS RequestingUser, b.GearId, b.StartDate, b.EndDate,
+                                
+                                g.Id AS GearId, g.[Name] AS GearName, g.Description, g.ImageLocation, 
+                                g.CreateDateTime AS GearCreateDate, g.PurchaseDate, g.IsPublic, g.CategoryId, g.UserProfileId AS GearOwner,
+                                
+                                c.[name] AS CategoryName, 
+                                
+                                u.FirstName, u.LastName, u.DisplayName, u.Email, u.CreateDateTime, u.ImageLocation AS ProfileImage
+                         FROM   Borrow b
+                                LEFT JOIN Gear g ON b.GearId = g.Id
+                                LEFT JOIN Category c ON g.CategoryId = c.Id
+                                LEFT JOIN UserProfile u ON g.UserProfileId = u.Id
+                        WHERE   g.Id = @id AND b.UserProfileId = @UserProfileId;";
+
+                    DbUtils.AddParameter(cmd, "@Id", id);
+                    DbUtils.AddParameter(cmd, "@UserProfileId", userProfileId);
+
+                    var reader = cmd.ExecuteReader();
+                    Borrow borrow = null;
+
+                    if (reader.Read())
+                    {
+                        borrow = NewBorrowFromReader(reader);
+                    }
+
+                    reader.Close();
+                    return borrow;
+                }
+            }
+        }
+
         public void UpdateBorrowed(Borrow borrow)
         {
             using (var conn = Connection)
@@ -186,16 +225,16 @@ namespace GearShare.Repositories
             return new Borrow()
             {
                 Id = DbUtils.GetInt(reader, "Id"),
-                StatusId = DbUtils.GetInt(reader, "StatusId"),
+                StatusId = DbUtils.GetNullableInt(reader, "StatusId"),
                 Status = new Status()
                 {
-                    Id = DbUtils.GetInt(reader, "StatusId"),
+                    Id = DbUtils.GetNullableInt(reader, "StatusId"),
                     Name = DbUtils.GetString(reader, "CategoryName")
                 },
-                UserProfileId = DbUtils.GetInt(reader, "StatusId"),
+                UserProfileId = DbUtils.GetInt(reader, "RequestingUser"),
                 UserProfile = new UserProfile()
                 {
-                    Id = DbUtils.GetInt(reader, "UserProfileId"),
+                    Id = DbUtils.GetInt(reader, "RequestingUser"),
                     FirstName = DbUtils.GetString(reader, "FirstName"),
                     LastName = DbUtils.GetString(reader, "LastName"),
                     DisplayName = DbUtils.GetString(reader, "DisplayName"),
@@ -204,35 +243,8 @@ namespace GearShare.Repositories
                     ImageLocation = DbUtils.GetString(reader, "ProfileImage")
                 },
                 GearId = DbUtils.GetInt(reader, "GearId"),
-                Gear = new Gear()
-                {
-                    Id = DbUtils.GetInt(reader, "Id"),
-                    Name = DbUtils.GetString(reader, "GearName"),
-                    Description = DbUtils.GetString(reader, "Description"),
-                    ImageLocation = DbUtils.GetString(reader, "ImageLocation"),
-                    CreateDateTime = DbUtils.GetDateTime(reader, "GearCreateDate"),
-                    PurchaseDate = DbUtils.GetNullableDateTime(reader, "PurchaseDate"),
-                    IsPublic = DbUtils.GetBoolean(reader, "IsPublic"),
-                    CategoryId = DbUtils.GetInt(reader, "CategoryId"),
-                    Category = new Category()
-                    {
-                        Id = DbUtils.GetInt(reader, "CategoryId"),
-                        Name = DbUtils.GetString(reader, "CategoryName")
-                    },
-                    UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
-                    UserProfile = new UserProfile()
-                    {
-                        Id = DbUtils.GetInt(reader, "UserProfileId"),
-                        FirstName = DbUtils.GetString(reader, "FirstName"),
-                        LastName = DbUtils.GetString(reader, "LastName"),
-                        DisplayName = DbUtils.GetString(reader, "DisplayName"),
-                        Email = DbUtils.GetString(reader, "Email"),
-                        CreateDateTime = DbUtils.GetDateTime(reader, "CreateDateTime"),
-                        ImageLocation = DbUtils.GetString(reader, "ProfileImage")
-                    }
-                },
                 StartDate = DbUtils.GetDateTime(reader, "StartDate"),
-                EndDate = DbUtils.GetDateTime(reader, "EndDate"),
+                EndDate = DbUtils.GetNullableDateTime(reader, "EndDate"),
             };
         }
     }
