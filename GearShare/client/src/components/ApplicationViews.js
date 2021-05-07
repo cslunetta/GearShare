@@ -9,6 +9,7 @@ import MyGearList from "./gear/MyGearList";
 import GearDetails from "./gear/GearDetails";
 import GearForm from "./gear/GearForm";
 import { CategoryProvider } from "../providers/CategoryProvider";
+import { BorrowRequestList } from "./borrow/BorrowRequestList";
 
 export default function ApplicationViews() {
     const { isLoggedIn } = useContext(UserProfileContext);
@@ -51,6 +52,16 @@ export default function ApplicationViews() {
                         <Route path={`/mygear/edit/:gearId`}>
                             <GearForm />
                         </Route>
+
+                        <Route path={`/gearrequests/myrequests`}>
+                            <BorrowRequestList />
+                        </Route>
+                        
+                        <Route path={`/gearrequests/mygear`}>
+                            <BorrowRequestList />
+                        </Route>
+
+
                     </CategoryProvider>
                 </GearProvider>
             </Switch>
