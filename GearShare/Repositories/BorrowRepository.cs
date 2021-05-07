@@ -22,12 +22,12 @@ namespace GearShare.Repositories
                 {
                     cmd.CommandText = @"
                         INSERT INTO Borrow (
-                                    UserProfileId, GearId, StartDate)
+                                    StatusId, UserProfileId, GearId, StartDate)
                         OUTPUT INSERTED.ID
                         VALUES (
-                                    @StatusId, @UserProfileId, @GearId, @StartDate)";
+                                    null, @UserProfileId, @GearId, @StartDate)";
 
-                    DbUtils.AddParameter(cmd, "@StatusId", borrow.StatusId);
+                    //DbUtils.AddParameter(cmd, "@StatusId", borrow.StatusId);
                     DbUtils.AddParameter(cmd, "@UserProfileId", borrow.UserProfileId);
                     DbUtils.AddParameter(cmd, "@GearId", borrow.GearId);
                     DbUtils.AddParameter(cmd, "@StartDate", borrow.StartDate);
@@ -46,7 +46,7 @@ namespace GearShare.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT  b.Id, b.StatusId, b.UserProfileId AS RequestingUser, b.GearId, b.StartDate, b.EndDate
+                        SELECT  b.Id, b.StatusId, b.UserProfileId AS RequestingUser, b.GearId, b.StartDate, b.EndDate,
                                 
                                 g.Id AS GearId, g.[Name] AS GearName, g.Description, g.ImageLocation, 
                                 g.CreateDateTime AS GearCreateDate, g.PurchaseDate, g.IsPublic, g.CategoryId, g.UserProfileId AS GearOwner,
@@ -84,7 +84,7 @@ namespace GearShare.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT  b.Id, b.StatusId, b.UserProfileId AS RequestingUser, b.GearId, b.StartDate, b.EndDate
+                        SELECT  b.Id, b.StatusId, b.UserProfileId AS RequestingUser, b.GearId, b.StartDate, b.EndDate,
                                 
                                 g.Id AS GearId, g.[Name] AS GearName, g.Description, g.ImageLocation, 
                                 g.CreateDateTime AS GearCreateDate, g.PurchaseDate, g.IsPublic, g.CategoryId, g.UserProfileId AS GearOwner,
