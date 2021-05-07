@@ -28,7 +28,6 @@ const GearForm = () => {
         purchaseDate: "",
         imageLocation: "",
     });
-    console.log(gear)
 
     const [isLoading, setIsLoading] = useState(true);
 
@@ -77,7 +76,6 @@ const GearForm = () => {
                 getGearById(gearId).then((gear) => {
                     setGear(gear);
                     setIsLoading(false);
-                    console.log(gear)
                 });
             } else {
                 setIsLoading(false);

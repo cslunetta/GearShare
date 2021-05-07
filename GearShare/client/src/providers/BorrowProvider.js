@@ -26,7 +26,12 @@ export const BorrowProvider = (props) => {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
-            }).then((res) => res.json()).then((res) => console.log(res))
+            }).then((res) => {
+                if (res.ok) {
+                    return res.json();
+                }
+                return false;
+            })
         );
     };
 
@@ -59,15 +64,16 @@ export const BorrowProvider = (props) => {
     };
 
     const addBorrowed = (borrow) => {
-        return getToken().then((token) =>
-            fetch(`${apiUrl}`, {
-                method: "POST",
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(borrow),
-            })
+        return getToken().then(
+            (token) =>
+                fetch(`${apiUrl}`, {
+                    method: "POST",
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(borrow),
+                })
             // .then((res) => res.json())
         );
     };

@@ -56,7 +56,10 @@ namespace GearShare.Controllers
         {
             var currentUserProfile = GetCurrentProfile();
             var borrow = _borrowRepository.GetBorrowByGearId(id, currentUserProfile.Id);
-
+            if (borrow == null)
+            {
+                return (NotFound());
+            }
             return Ok(borrow);
         }
 

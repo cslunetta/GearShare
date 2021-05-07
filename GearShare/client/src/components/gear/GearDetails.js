@@ -11,9 +11,7 @@ const GearDetails = () => {
     const [gear, setGear] = useState([]);
 
     const { addBorrowed, GetBorrowByGearIdForCurrentUser } = useContext(BorrowContext);
-    const [borrow, setBorrow] = useState({
-        id: 0,
-    });
+    const [borrow, setBorrow] = useState();
 
     const { id } = useParams();
     const history = useHistory();
