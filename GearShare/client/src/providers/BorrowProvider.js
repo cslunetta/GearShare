@@ -58,7 +58,7 @@ export const BorrowProvider = (props) => {
                     Authorization: `Bearer ${token}`,
                 },
             })
-                .then((res) => res.json)
+                .then((res) => res.json())
                 .then(setBorrow)
         );
     };

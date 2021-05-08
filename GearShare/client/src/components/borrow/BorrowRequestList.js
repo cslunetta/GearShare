@@ -1,8 +1,16 @@
+import { useContext, useEffect } from "react";
 import { NavLink as RRNavLink } from "react-router-dom";
-import { Col, Container, Navbar, NavItem, NavLink, Row } from "reactstrap";
-import Gear from "../gear/Gear";
+import { Col, Container, Navbar, NavLink, Row, Table } from "reactstrap";
+import { BorrowContext } from "../../providers/BorrowProvider";
+import Borrow from "./Borrow";
 
 export const BorrowRequestList = () => {
+    const { borrow, getCurrentUsersBorrowed } = useContext(BorrowContext);
+
+    useEffect(() => {
+        getCurrentUsersBorrowed();
+    }, []);
+
     return (
         <Container>
             <Row>
@@ -22,23 +30,27 @@ export const BorrowRequestList = () => {
                     </div>
                 </Navbar>
             </Row>
-            <Row className="mt-5">
-                <Col>
-                    <h4>Name</h4>
-                </Col>
-                <Col>
-                    <h4>Category</h4>
-                </Col>
-                <Col>
-                    <h4>User</h4>
-                </Col>
-                <Col>
-                    <h4>Status</h4>
-                </Col>
-            </Row>
-            {/* {borrow.map((b) => (
-                <Borrow key={b.id} borrow={b} />
-            ))} */}
+            <Table hover>
+                <thead className="mt-5">
+                    <th>
+                        <h4>Name</h4>
+                    </th>
+                    <th>
+                        <h4>Category</h4>
+                    </th>
+                    <th>
+                        <h4>User</h4>
+                    </th>
+                    <th>
+                        <h4>Status</h4>
+                    </th>
+                </thead>
+                <tbody>
+                    {borrow.map((b) => (
+                        <Borrow key={b.id} borrow={b} />
+                    ))}
+                </tbody>
+            </Table>
         </Container>
     );
 };

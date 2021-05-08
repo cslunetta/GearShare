@@ -45,6 +45,14 @@ export default function ApplicationViews() {
                         <Route path={`/geardetails/:id`}>
                             <GearDetails />
                         </Route>
+
+                        <Route path={`/gearrequests/myrequests`}>
+                            <BorrowRequestList />
+                        </Route>
+
+                        <Route path={`/gearrequests/mygear`}>
+                            <BorrowRequestList />
+                        </Route>
                     </BorrowProvider>
 
                     <CategoryProvider>
@@ -55,16 +63,6 @@ export default function ApplicationViews() {
                         <Route path={`/mygear/edit/:gearId`}>
                             <GearForm />
                         </Route>
-
-                        <Route path={`/gearrequests/myrequests`}>
-                            <BorrowRequestList />
-                        </Route>
-                        
-                        <Route path={`/gearrequests/mygear`}>
-                            <BorrowRequestList />
-                        </Route>
-
-
                     </CategoryProvider>
                 </GearProvider>
             </Switch>
