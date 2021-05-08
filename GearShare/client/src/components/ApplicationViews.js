@@ -47,7 +47,7 @@ export default function ApplicationViews() {
                         </Route>
 
                         <Route path={`/gearrequests/myrequests`}>
-                            <BorrowRequestList />
+                            <BorrowRequestList myrequests />
                         </Route>
 
                         <Route path={`/gearrequests/mygear`}>

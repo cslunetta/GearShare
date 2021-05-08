@@ -19,7 +19,7 @@ export const BorrowProvider = (props) => {
         );
     };
 
-    const GetBorrowByGearIdForCurrentUser = (id) => {
+    const getBorrowByGearIdForCurrentUser = (id) => {
         return getToken().then((token) =>
             fetch(`${apiUrl}/gearId/${id}`, {
                 method: "GET",
@@ -44,7 +44,7 @@ export const BorrowProvider = (props) => {
                     Authorization: `Bearer ${token}`,
                 },
             })
-                .then((res) => res.json)
+                .then((res) => res.json())
                 .then(setBorrow)
         );
     };
@@ -97,7 +97,7 @@ export const BorrowProvider = (props) => {
                 borrow,
                 setBorrow,
                 getBorrowById,
-                GetBorrowByGearIdForCurrentUser,
+                getBorrowByGearIdForCurrentUser,
                 getAllBorrowedByGearCurrentUser,
                 getCurrentUsersBorrowed,
                 addBorrowed,
