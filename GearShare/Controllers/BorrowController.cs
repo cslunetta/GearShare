@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace GearShare.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class BorrowController : ControllerBase
@@ -51,13 +51,27 @@ namespace GearShare.Controllers
             return Ok(borrow);
         }
 
+        [HttpGet("gearId/{id}")]
+        public IActionResult GetBorrowByGearId(int id)
+        {
+            var currentUserProfile = GetCurrentProfile();
+            var borrow = _borrowRepository.GetBorrowByGearId(id, currentUserProfile.Id);
+            if (borrow == null)
+            {
+                return (NotFound());
+            }
+            return Ok(borrow);
+        }
+
         [HttpPost]
         public IActionResult Post(Borrow borrow)
         {
             var currentUserProfile = GetCurrentProfile();
             borrow.UserProfileId = currentUserProfile.Id;
+            borrow.StartDate = DateTime.Now;
             _borrowRepository.AddBorrow(borrow);
-            return CreatedAtAction("Get", new { id = borrow.Id }, borrow);
+            return NoContent();
+                //CreatedAtAction("Get", new { id = borrow.Id }, borrow);
         }
 
         [HttpPut("{id}")]
