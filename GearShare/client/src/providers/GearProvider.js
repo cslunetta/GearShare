@@ -59,7 +59,6 @@ export const GearProvider = (props) => {
     };
 
     const updateGear = (gear) => {
-        console.log(gear)
         return getToken().then((token) =>
             fetch(`${apiUrl}/${gear.id}`, {
                 method: "PUT",

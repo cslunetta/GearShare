@@ -43,6 +43,7 @@ namespace GearShare
             services.AddTransient<IUserProfileRepository, UserProfileRepository>();
             services.AddTransient<IGearRepository, GearRepository>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
+            services.AddTransient<IBorrowRepository, BorrowRepository>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
