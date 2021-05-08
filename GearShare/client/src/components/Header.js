@@ -45,6 +45,14 @@ export default function Header() {
                                         My Gear
                                     </NavLink>
                                 </NavItem>
+                                <NavItem>
+                                    <NavLink
+                                        tag={RRNavLink}
+                                        to="/gearrequests/myrequests"
+                                    >
+                                        Gear Requests
+                                    </NavLink>
+                                </NavItem>
                             </>
                         )}
                     </Nav>

@@ -9,6 +9,7 @@ import MyGearList from "./gear/MyGearList";
 import GearDetails from "./gear/GearDetails";
 import GearForm from "./gear/GearForm";
 import { CategoryProvider } from "../providers/CategoryProvider";
+import { BorrowRequestList } from "./borrow/BorrowRequestList";
 import { BorrowProvider } from "../providers/BorrowProvider";
 
 export default function ApplicationViews() {
@@ -43,6 +44,14 @@ export default function ApplicationViews() {
                     <BorrowProvider>
                         <Route path={`/geardetails/:id`}>
                             <GearDetails />
+                        </Route>
+
+                        <Route path={`/gearrequests/myrequests`}>
+                            <BorrowRequestList myrequests />
+                        </Route>
+
+                        <Route path={`/gearrequests/mygear`}>
+                            <BorrowRequestList />
                         </Route>
                     </BorrowProvider>
 

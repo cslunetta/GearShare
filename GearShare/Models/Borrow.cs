@@ -13,7 +13,6 @@ namespace GearShare.Models
 
         [DisplayName("Status")]
         public int? StatusId { get; set; }
-        public Status Status { get; set; }
         
         [Required]
         [DisplayName("Borrower")]
@@ -23,7 +22,6 @@ namespace GearShare.Models
         [Required]
         [DisplayName("Gear")]
         public int GearId { get; set; }
-        public Gear Gear { get; set; }
 
         [DataType(DataType.Date)]
         public DateTime StartDate { get; set; }

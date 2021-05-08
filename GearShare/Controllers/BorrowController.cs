@@ -18,11 +18,13 @@ namespace GearShare.Controllers
     {
         private readonly IBorrowRepository _borrowRepository;
         private readonly IUserProfileRepository _userProfileRepository;
+        private readonly IGearRepository _gearRepository;
 
-        public BorrowController(IBorrowRepository borrowRepository, IUserProfileRepository userProfileRepository)
+        public BorrowController(IBorrowRepository borrowRepository, IUserProfileRepository userProfileRepository, IGearRepository gearRepository)
         {
             _borrowRepository = borrowRepository;
             _userProfileRepository = userProfileRepository;
+            _gearRepository = gearRepository;
         }
 
         [HttpGet("GetAllBorrowedByGearUserId")]
@@ -30,17 +32,37 @@ namespace GearShare.Controllers
         {
             var currentUserProfile = GetCurrentProfile();
             var borrow = _borrowRepository.GetAllBorrowedByGearUserId(currentUserProfile.Id);
+            List<BorrowWithGear> borrowWithGear = new List<BorrowWithGear>();
+            foreach (Borrow request in borrow)
+            {
+                BorrowWithGear b = new BorrowWithGear()
+                {
+                    Borrow = request,
+                    Gear = _gearRepository.GetGearById(request.GearId)
+                };
+                borrowWithGear.Add(b);
+            }
 
-            return Ok(borrow);
+            return Ok(borrowWithGear);
         }
-        
+
         [HttpGet("GetCurrentUsersBorrowed")]
         public IActionResult GetCurrentUsersBorrowed()
         {
             var currentUserProfile = GetCurrentProfile();
             var borrow = _borrowRepository.GetCurrentUsersBorrowed(currentUserProfile.Id);
+            List<BorrowWithGear> borrowWithGear = new List<BorrowWithGear>();
+            foreach (Borrow request in borrow)
+            {
+                BorrowWithGear b = new BorrowWithGear()
+                {
+                    Borrow = request,
+                    Gear = _gearRepository.GetGearById(request.GearId)
+                };
+                borrowWithGear.Add(b);
+            }
 
-            return Ok(borrow);
+            return Ok(borrowWithGear);
         }
 
         [HttpGet("{id}")]

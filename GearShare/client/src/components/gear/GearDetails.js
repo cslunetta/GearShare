@@ -10,7 +10,7 @@ const GearDetails = () => {
     );
     const [gear, setGear] = useState([]);
 
-    const { addBorrowed, GetBorrowByGearIdForCurrentUser } = useContext(BorrowContext);
+    const { addBorrowed, getBorrowByGearIdForCurrentUser } = useContext(BorrowContext);
     const [borrow, setBorrow] = useState();
 
     const { id } = useParams();
@@ -23,7 +23,7 @@ const GearDetails = () => {
     }, []);
 
     useEffect(() => {
-        GetBorrowByGearIdForCurrentUser(id).then(setBorrow);
+        getBorrowByGearIdForCurrentUser(id).then(setBorrow);
     }, []);
 
     const DetailButtons = () => {

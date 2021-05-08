@@ -95,7 +95,7 @@ namespace GearShare.Repositories
                          FROM   Borrow b
                                 LEFT JOIN Gear g ON b.GearId = g.Id
                                 LEFT JOIN Category c ON g.CategoryId = c.Id
-                                LEFT JOIN UserProfile u ON g.UserProfileId = u.Id
+                                LEFT JOIN UserProfile u ON b.UserProfileId = u.Id
                         WHERE   b.UserProfileId = @userprofileId";
 
                     DbUtils.AddParameter(cmd, "@userProfileId", UserProfileId);
@@ -226,11 +226,6 @@ namespace GearShare.Repositories
             {
                 Id = DbUtils.GetInt(reader, "Id"),
                 StatusId = DbUtils.GetNullableInt(reader, "StatusId"),
-                Status = new Status()
-                {
-                    Id = DbUtils.GetNullableInt(reader, "StatusId"),
-                    Name = DbUtils.GetString(reader, "CategoryName")
-                },
                 UserProfileId = DbUtils.GetInt(reader, "RequestingUser"),
                 UserProfile = new UserProfile()
                 {
