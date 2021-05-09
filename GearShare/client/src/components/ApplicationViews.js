@@ -11,6 +11,7 @@ import GearForm from "./gear/GearForm";
 import { CategoryProvider } from "../providers/CategoryProvider";
 import { BorrowRequestList } from "./borrow/BorrowRequestList";
 import { BorrowProvider } from "../providers/BorrowProvider";
+import UserDetail from "./user/UserDetail";
 
 export default function ApplicationViews() {
     const { isLoggedIn } = useContext(UserProfileContext);
@@ -34,6 +35,10 @@ export default function ApplicationViews() {
 
                 <Route path="/register">
                     <Register />
+                </Route>
+
+                <Route path="/userprofiledetails">
+                    <UserDetail />
                 </Route>
 
                 <GearProvider>

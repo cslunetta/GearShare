@@ -54,6 +54,14 @@ export default function Header() {
                                         Gear Requests
                                     </NavLink>
                                 </NavItem>
+                                <NavItem>
+                                    <NavLink
+                                        tag={RRNavLink}
+                                        to="/userprofiledetails"
+                                    >
+                                        My Profile
+                                    </NavLink>
+                                </NavItem>
                             </>
                         )}
                     </Nav>
@@ -61,7 +69,7 @@ export default function Header() {
                         {isLoggedIn && (
                             <>
                                 <NavbarText>
-                                    Hello {currentUser.displayName}
+                                    <b>Hello {currentUser.displayName}</b>
                                 </NavbarText>
                                 <NavItem
                                     aria-current="page"
