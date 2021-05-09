@@ -101,14 +101,18 @@ namespace GearShare.Controllers
         {
             var currentUserProfile = GetCurrentProfile();
             var currentBorrow = _borrowRepository.GetBorrowById(id);
+            var gear = _gearRepository.GetGearById(currentBorrow.GearId);
             if (id != borrow.Id)
             {
                 return BadRequest();
             }
-            if (currentUserProfile.Id != currentBorrow.UserProfileId)
+            if (currentUserProfile.Id != gear.UserProfileId)
             {
                 return Unauthorized();
             }
+            borrow.UserProfileId = currentBorrow.UserProfileId;
+            borrow.GearId = currentBorrow.GearId;
+            borrow.StartDate = currentBorrow.StartDate;
             _borrowRepository.UpdateBorrowed(borrow);
             return NoContent();
         }

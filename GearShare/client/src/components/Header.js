@@ -8,6 +8,7 @@ import {
     Nav,
     NavItem,
     NavLink,
+    NavbarText,
 } from "reactstrap";
 import { UserProfileContext } from "../providers/UserProfileProvider";
 
@@ -59,15 +60,16 @@ export default function Header() {
                     <Nav navbar>
                         {isLoggedIn && (
                             <>
-                                <NavItem>
-                                    <a
-                                        aria-current="page"
-                                        className="nav-link"
-                                        style={{ cursor: "pointer" }}
-                                        onClick={logout}
-                                    >
-                                        Logout
-                                    </a>
+                                <NavbarText>
+                                    Hello {currentUser.displayName}
+                                </NavbarText>
+                                <NavItem
+                                    aria-current="page"
+                                    className="nav-link"
+                                    style={{ cursor: "pointer" }}
+                                    onClick={logout}
+                                >
+                                    Logout
                                 </NavItem>
                             </>
                         )}
