@@ -1,15 +1,18 @@
 import { useContext, useEffect } from "react";
 import { NavLink as RRNavLink } from "react-router-dom";
-import { Col, Container, Navbar, NavLink, Row, Table } from "reactstrap";
+import { Container, Navbar, NavLink, Row, Table } from "reactstrap";
 import { BorrowContext } from "../../providers/BorrowProvider";
 import Borrow from "./Borrow";
 
 export const BorrowRequestList = ({ myrequests }) => {
-    const { borrow, getCurrentUsersBorrowed, getAllBorrowedByGearCurrentUser } = useContext(BorrowContext);
+    const {
+        borrow,
+        getCurrentUsersBorrowed,
+        getAllBorrowedByGearCurrentUser,
+    } = useContext(BorrowContext);
 
     useEffect(() => {
-        if (myrequests)
-        {
+        if (myrequests) {
             getCurrentUsersBorrowed();
         } else {
             getAllBorrowedByGearCurrentUser();
@@ -30,29 +33,31 @@ export const BorrowRequestList = ({ myrequests }) => {
                     </div>
                     <div>
                         <NavLink tag={RRNavLink} to="/gearrequests/mygear">
-                        {myrequests ? "My Gear" : <b>My Gear</b>}
+                            {myrequests ? "My Gear" : <b>My Gear</b>}
                         </NavLink>
                     </div>
                 </Navbar>
             </Row>
             <Table hover className="mt-5">
                 <thead>
-                    <th>
-                        <h4>Name</h4>
-                    </th>
-                    <th>
-                        <h4>Category</h4>
-                    </th>
-                    <th>
-                        <h4>User</h4>
-                    </th>
-                    <th>
-                        <h4>Status</h4>
-                    </th>
+                    <tr>
+                        <th>
+                            <h4>Name</h4>
+                        </th>
+                        <th>
+                            <h4>Category</h4>
+                        </th>
+                        <th>
+                            <h4>User</h4>
+                        </th>
+                        <th>
+                            <h4>Status</h4>
+                        </th>
+                    </tr>
                 </thead>
                 <tbody>
                     {borrow.map((b) => (
-                        <Borrow key={b.id} borrow={b} myrequests={myrequests} />
+                        <Borrow key={b.borrow.id} borrow={b} myrequests={myrequests} />
                     ))}
                 </tbody>
             </Table>
