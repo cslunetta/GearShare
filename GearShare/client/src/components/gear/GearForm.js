@@ -58,12 +58,18 @@ const GearForm = () => {
                     id: gear.id,
                 }).then(() => history.push(`/geardetails/${gear.id}`));
             } else {
+                const purchaseDate = () => {
+                    if (gear.purchaseDate) {
+                        return gear.purchaseDate;
+                    }
+                    return null;
+                };
                 addGear({
                     name: gear.name,
                     categoryId: parseInt(gear.categoryId),
                     isPublic: Boolean(gear.isPublic),
                     description: gear.description,
-                    purchaseDate: gear.purchaseDate,
+                    purchaseDate: purchaseDate,
                     imageLocation: gear.imageLocation,
                 }).then(() => history.push(`/mygear`));
             }
@@ -145,7 +151,13 @@ const GearForm = () => {
                                 </Col>
                                 <Col>
                                     <FormGroup>
-                                        <Label for="isPublic">{gearId ? (gear.isPublic ? "Current Status: Public" : "Private") : "Status: "}</Label>
+                                        <Label for="isPublic">
+                                            {gearId
+                                                ? gear.isPublic
+                                                    ? "Current Status: Public"
+                                                    : "Private"
+                                                : "Status: "}
+                                        </Label>
                                         <Input
                                             type="select"
                                             id="isPublic"
@@ -160,7 +172,11 @@ const GearForm = () => {
                                             <option name="1" value="true">
                                                 Public
                                             </option>
-                                            <option name="0" id="isPublic" value="">
+                                            <option
+                                                name="0"
+                                                id="isPublic"
+                                                value=""
+                                            >
                                                 Private
                                             </option>
                                         </Input>
