@@ -167,15 +167,13 @@ namespace GearShare.Repositories
                            SET  FirstName = @FirstName,
                                 LastName = @LastName,
                                 DisplayName = @DisplayName,
-                                ImageLocation = @ImageLocation,
-                                Email = @Email
+                                ImageLocation = @ImageLocation
                          WHERE  Id = @Id";
 
                     DbUtils.AddParameter(cmd, "@FirstName", userProfile.FirstName);
                     DbUtils.AddParameter(cmd, "@LastName",userProfile.LastName);
                     DbUtils.AddParameter(cmd, "@DisplayName",userProfile.DisplayName);
                     DbUtils.AddParameter(cmd, "@ImageLocation",userProfile.ImageLocation);
-                    DbUtils.AddParameter(cmd, "@Email",userProfile.Email);
                     DbUtils.AddParameter(cmd, "@Id",userProfile.Id);
 
                     cmd.ExecuteNonQuery();

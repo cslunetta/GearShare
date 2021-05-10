@@ -44,18 +44,18 @@ const UserDetail = () => {
                     </Row>
                     <Row>
                         <Col>
-                            <h4>Name:</h4>
-                        </Col>
-                        <Col>
-                            <p>{user.fullName}</p>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
                             <h4>Email:</h4>
                         </Col>
                         <Col>
                             <p>{user.email}</p>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <h4>Name:</h4>
+                        </Col>
+                        <Col>
+                            <p>{user.fullName}</p>
                         </Col>
                     </Row>
 

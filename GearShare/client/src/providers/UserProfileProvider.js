@@ -7,7 +7,7 @@ import { useHistory } from "react-router";
 export const UserProfileContext = createContext();
 
 export function UserProfileProvider(props) {
-    const apiUrl = "/api/userprofile";
+    const apiUrl = "/api/UserProfile";
     const history = useHistory();
 
     const userProfile = sessionStorage.getItem("userProfile");

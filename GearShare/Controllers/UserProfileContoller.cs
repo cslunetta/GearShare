@@ -56,7 +56,6 @@ namespace GearShare.Controllers
             currentUserProfile.FirstName = userProfile.FirstName;
             currentUserProfile.LastName = userProfile.LastName;
             currentUserProfile.ImageLocation = userProfile.ImageLocation;
-            currentUserProfile.Email = userProfile.Email;
 
             _userProfileRepository.UpdateUser(currentUserProfile);
             return NoContent();

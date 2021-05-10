@@ -53,9 +53,10 @@ const UserForm = () => {
                     <img src={user.imageLocation} alt="" />
                     <Label hidden />
                     <Input
-                        type="file"
+                        type="text"
                         id="imageLocation"
                         onChange={handleControlledInputChange}
+                        value={user.imageLocation}
                     />
                 </Col>
                 <Col>
@@ -75,7 +76,15 @@ const UserForm = () => {
                     </Row>
                     <Row>
                         <Col>
-                            <h4>Full Name:</h4>
+                            <h4>Email:</h4>
+                        </Col>
+                        <Col>
+                            <p>{user.email}</p>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <h4>Name:</h4>
                         </Col>
                         <Col>
                             <Row>
@@ -91,25 +100,12 @@ const UserForm = () => {
                                 <Col>
                                     <Input
                                         type="text"
-                                        id="firstName"
+                                        id="lastName"
                                         onChange={handleControlledInputChange}
                                         value={user.lastName}
                                     />
                                 </Col>
                             </Row>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
-                            <h4>Email:</h4>
-                        </Col>
-                        <Col>
-                            <Input
-                                type="text"
-                                id="email"
-                                onChange={handleControlledInputChange}
-                                value={user.email}
-                            />
                         </Col>
                     </Row>
 
