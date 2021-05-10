@@ -9,5 +9,6 @@ namespace GearShare.Repositories
         UserProfile GetByFirebaseUserId(string firebaseUserId);
         UserProfile GetUserProfileById(int id);
         List<UserProfile> GetUserProfiles();
+        void UpdateUser(UserProfile userProfile);
     }
 }

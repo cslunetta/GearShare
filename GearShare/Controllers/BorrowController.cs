@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace GearShare.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class BorrowController : ControllerBase
