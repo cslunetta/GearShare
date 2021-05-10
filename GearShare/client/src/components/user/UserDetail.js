@@ -1,10 +1,12 @@
 import { useContext, useEffect, useState } from "react";
+import { useHistory } from "react-router";
 import { Button, Col, Container, Row } from "reactstrap";
 import { UserProfileContext } from "../../providers/UserProfileProvider";
 
 const UserDetail = () => {
     const { getUserDetails } = useContext(UserProfileContext);
     const [user, setUser] = useState({});
+    const history = useHistory();
 
     useEffect(() => {
         getUserDetails().then(setUser);
@@ -19,9 +21,7 @@ const UserDetail = () => {
                 <p>Wait... Who are you again???</p>
             </Row>
             <Row>
-                <Col>
                     <h4>{user.displayName}</h4>
-                </Col>
             </Row>
             <Row>
                 <Col>
@@ -44,7 +44,7 @@ const UserDetail = () => {
                     </Row>
                     <Row>
                         <Col>
-                            <h4>Full Name:</h4>
+                            <h4>Name:</h4>
                         </Col>
                         <Col>
                             <p>{user.fullName}</p>
@@ -59,7 +59,7 @@ const UserDetail = () => {
                         </Col>
                     </Row>
 
-                    <Button>Update</Button>
+                    <Button onClick={() => history.push("userprofiledetails/update")}>Update</Button>
                 </Col>
             </Row>
         </Container>

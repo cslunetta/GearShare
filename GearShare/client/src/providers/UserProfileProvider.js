@@ -107,6 +107,19 @@ export function UserProfileProvider(props) {
         );
     };
 
+    const updateUserProfile = (userProfile) => {
+        return getToken().then((token) =>
+            fetch(`${apiUrl}`, {
+                method: "PUT",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(userProfile),
+            }).then(getUserDetails)
+        );
+    };
+
     return (
         <UserProfileContext.Provider
             value={{
@@ -117,6 +130,7 @@ export function UserProfileProvider(props) {
                 getToken,
                 getUserProfile,
                 getUserDetails,
+                updateUserProfile,
             }}
         >
             {isFirebaseReady ? (

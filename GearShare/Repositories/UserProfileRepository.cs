@@ -155,5 +155,33 @@ namespace GearShare.Repositories
             }
         }
 
+        public void UpdateUser(UserProfile userProfile)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        UPDATE  UserProfile
+                           SET  FirstName = @FirstName,
+                                LastName = @LastName,
+                                DisplayName = @DisplayName,
+                                ImageLocation = @ImageLocation,
+                                Email = @Email
+                         WHERE  Id = @Id";
+
+                    DbUtils.AddParameter(cmd, "@FirstName", userProfile.FirstName);
+                    DbUtils.AddParameter(cmd, "@LastName",userProfile.LastName);
+                    DbUtils.AddParameter(cmd, "@DisplayName",userProfile.DisplayName);
+                    DbUtils.AddParameter(cmd, "@ImageLocation",userProfile.ImageLocation);
+                    DbUtils.AddParameter(cmd, "@Email",userProfile.Email);
+                    DbUtils.AddParameter(cmd, "@Id",userProfile.Id);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
     }
 }

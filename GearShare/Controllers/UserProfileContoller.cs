@@ -48,6 +48,20 @@ namespace GearShare.Controllers
             return Ok(profile);
         }
 
+        [HttpPut]
+        public IActionResult Put(UserProfile userProfile)
+        {
+            var currentUserProfile = GetCurrentProfile();
+            currentUserProfile.DisplayName = userProfile.DisplayName;
+            currentUserProfile.FirstName = userProfile.FirstName;
+            currentUserProfile.LastName = userProfile.LastName;
+            currentUserProfile.ImageLocation = userProfile.ImageLocation;
+            currentUserProfile.Email = userProfile.Email;
+
+            _userProfileRepository.UpdateUser(currentUserProfile);
+            return NoContent();
+        }
+
         private UserProfile GetCurrentProfile()
         {
             var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
