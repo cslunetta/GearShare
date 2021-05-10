@@ -23,7 +23,7 @@ const GearForm = () => {
     const [gear, setGear] = useState({
         name: "",
         categoryId: 0,
-        isPublic: Boolean,
+        isPublic: false,
         description: "",
         purchaseDate: "",
         imageLocation: "",
@@ -36,7 +36,11 @@ const GearForm = () => {
 
     const handleControlledInputChange = (e) => {
         const newGear = { ...gear };
-        newGear[e.target.id] = e.target.value;
+        if (e.target.id === "isPublic") {
+            newGear[e.target.id] = e.target.value === "true";
+        } else {
+            newGear[e.target.id] = e.target.value;
+        }
         setGear(newGear);
     };
 
@@ -97,7 +101,7 @@ const GearForm = () => {
         if (gear.purchaseDate !== null) {
             return gear.purchaseDate.split("T")[0];
         } else {
-            return null
+            return null;
         }
     };
 
@@ -164,11 +168,7 @@ const GearForm = () => {
                                 <Col>
                                     <FormGroup>
                                         <Label for="isPublic">
-                                            {gearId
-                                                ? gear.isPublic
-                                                    ? "Privacy Setting: Public"
-                                                    : "Privacy Setting: Private"
-                                                : "Privacy Setting: "}
+                                            Privacy Setting:
                                         </Label>
                                         <Input
                                             type="select"
@@ -180,11 +180,10 @@ const GearForm = () => {
                                             className="form-control"
                                             value={`${gear.isPublic}`}
                                         >
-                                            <option value="a">
-                                                Privacy Options...
-                                            </option>
                                             <option value="true">Public</option>
-                                            <option value="">Private</option>
+                                            <option value="false">
+                                                Private
+                                            </option>
                                         </Input>
                                     </FormGroup>
                                 </Col>
