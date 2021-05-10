@@ -41,7 +41,11 @@ const GearForm = () => {
     };
 
     const handleSave = () => {
-        if (parseInt(gear.categoryId) === 0) {
+        if (gear.isPublic === "a" && parseInt(gear.categoryId) === 0) {
+            window.alert("Please select a Category and Privacy Setting");
+        } else if (gear.isPublic === "a") {
+            window.alert("Please select a Privacy Setting");
+        } else if (parseInt(gear.categoryId) === 0) {
             window.alert("Please select a Category");
         } else {
             setIsLoading(true);
@@ -88,6 +92,14 @@ const GearForm = () => {
             }
         });
     }, []);
+
+    const purchaseDate = () => {
+        if (gear.purchaseDate !== null) {
+            return gear.purchaseDate.split("T")[0];
+        } else {
+            return null
+        }
+    };
 
     return (
         <Container>
@@ -154,9 +166,9 @@ const GearForm = () => {
                                         <Label for="isPublic">
                                             {gearId
                                                 ? gear.isPublic
-                                                    ? "Current Status: Public"
-                                                    : "Private"
-                                                : "Status: "}
+                                                    ? "Privacy Setting: Public"
+                                                    : "Privacy Setting: Private"
+                                                : "Privacy Setting: "}
                                         </Label>
                                         <Input
                                             type="select"
@@ -168,17 +180,11 @@ const GearForm = () => {
                                             className="form-control"
                                             value={`${gear.isPublic}`}
                                         >
-                                            <option>Privacy Options...</option>
-                                            <option name="1" value="true">
-                                                Public
+                                            <option value="a">
+                                                Privacy Options...
                                             </option>
-                                            <option
-                                                name="0"
-                                                id="isPublic"
-                                                value=""
-                                            >
-                                                Private
-                                            </option>
+                                            <option value="true">Public</option>
+                                            <option value="">Private</option>
                                         </Input>
                                     </FormGroup>
                                 </Col>
@@ -203,14 +209,14 @@ const GearForm = () => {
                                     id="purchaseDate"
                                     onChange={handleControlledInputChange}
                                     className="form-control"
-                                    value={gear.purchaseDate.split("T")[0]}
+                                    value={purchaseDate()}
                                 />
                             </FormGroup>
                             <FormGroup>
                                 <Label for="imageLocation">Image</Label>
                                 <Input
                                     id="imageLocation"
-                                    type="file"
+                                    type="text"
                                     onChange={handleControlledInputChange}
                                     // className="form-control"
                                     value={gear.imageLocation}
