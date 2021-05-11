@@ -65,12 +65,12 @@ const Borrow = ({ borrow, myrequests }) => {
             return "Pending";
         }
     };
-
+    
     return (
         <tr>
             <td>{borrow.gear.name}</td>
             <td>{borrow.gear.category.name}</td>
-            <td>{borrow.gear.userProfile.displayName}</td>
+            <td>{myrequests ? borrow.gear.userProfile.displayName : borrow.borrow.userProfile.displayName}</td>
             <td>{myrequests ? <StatusInfo /> : <RequestButtons />}</td>
         </tr>
     );

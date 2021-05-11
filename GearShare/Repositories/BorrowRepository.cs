@@ -57,7 +57,7 @@ namespace GearShare.Repositories
                          FROM   Borrow b
                                 LEFT JOIN Gear g ON b.GearId = g.Id
                                 LEFT JOIN Category c ON g.CategoryId = c.Id
-                                LEFT JOIN UserProfile u ON g.UserProfileId = u.Id
+                                LEFT JOIN UserProfile u ON b.UserProfileId = u.Id
                         WHERE   g.UserProfileId = @userprofileId";
 
                     DbUtils.AddParameter(cmd, "@userProfileId", UserProfileId);
