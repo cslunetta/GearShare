@@ -93,7 +93,6 @@ namespace GearShare.Controllers
             borrow.StartDate = DateTime.Now;
             _borrowRepository.AddBorrow(borrow);
             return NoContent();
-                //CreatedAtAction("Get", new { id = borrow.Id }, borrow);
         }
 
         [HttpPut("{id}")]

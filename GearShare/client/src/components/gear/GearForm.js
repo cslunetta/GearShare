@@ -217,7 +217,6 @@ const GearForm = () => {
                                     id="imageLocation"
                                     type="text"
                                     onChange={handleControlledInputChange}
-                                    // className="form-control"
                                     value={gear.imageLocation}
                                 />
                                 <FormText color="muted">

@@ -27,11 +27,9 @@ namespace GearShare.Repositories
                         VALUES (
                                     null, @UserProfileId, @GearId, @StartDate)";
 
-                    //DbUtils.AddParameter(cmd, "@StatusId", borrow.StatusId);
                     DbUtils.AddParameter(cmd, "@UserProfileId", borrow.UserProfileId);
                     DbUtils.AddParameter(cmd, "@GearId", borrow.GearId);
                     DbUtils.AddParameter(cmd, "@StartDate", borrow.StartDate);
-                    //DbUtils.AddParameter(cmd, "@EndDate", DbUtils.ValueOrDBNull(borrow.EndDate));
 
                     return borrow.Id = (int)cmd.ExecuteScalar();
                 }
@@ -212,7 +210,6 @@ namespace GearShare.Repositories
                     DbUtils.AddParameter(cmd, "@GearId", borrow.GearId);
                     DbUtils.AddParameter(cmd, "@StartDate", borrow.StartDate);
                     DbUtils.AddParameter(cmd, "@EndDate", borrow.EndDate);
-                    
                     DbUtils.AddParameter(cmd, "@Id", borrow.Id);
 
                     cmd.ExecuteNonQuery();
