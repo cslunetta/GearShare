@@ -78,6 +78,12 @@ From a terminal window, in any directory you'd like, run: `git clone git@github.
 
 ### Entity Relationship Diagram (ERD) & Mockups
 
-<img src="./README_Images/GearShare.png" width="10%"></img>
+<img src="./README_Images/GearShare_ERD.png"></img>
 ---
 
+<img src="./README_Images/WireFrame_GearLists.png"></img>
+<img src="./README_Images/WireFrame_GearDetails.png"></img>
+<img src="./README_Images/WireFrame_GearRequests.png"></img>
+<img src="./README_Images/WireFrame_GearForm.png" width="45%"></img>
+<img src="./README_Images/WireFrame_MyProfile.png" width="54%"></img>
+<img src="./README_Images/WireFrame_LoginRegister.png"></img>
