@@ -81,14 +81,12 @@ const GearDetails = () => {
             <Row>
                 <Col>
                     {gear.imageLocation ? (
-                        <img
-                            width="100%"
+                        <img className="detailImage"
                             src={gear.imageLocation}
                             alt={gear.name}
                         />
                     ) : (
-                        <img
-                            width="100%"
+                        <img className="detailImage"
                             src="https://c.pxhere.com/photos/a6/59/guitar_music_amplifier_ibanez_instrument-103814.jpg!d"
                             srcSet="https://c.pxhere.com/photos/a6/59/guitar_music_amplifier_ibanez_instrument-103814.jpg!d"
                             alt="music, white, guitar, color, instrument, blue, amplifier, electronics, ibanez, Free Images In PxHere"

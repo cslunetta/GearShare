@@ -53,3 +53,21 @@
   z-index: 100;
   display: block;
 }
+
+.picLink > .card-img-top {
+  object-fit: cover
+}
+
+.picLink:hover > .card-img-top {
+  object-fit: contain;
+}
+
+.overflowControl {
+  white-space: nowrap;
+  overflow: hidden;
+  text-Overflow: ellipsis;
+}
+
+img.detailImage {
+  height: 38vh;
+}

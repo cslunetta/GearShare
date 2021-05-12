@@ -74,7 +74,6 @@ export const BorrowProvider = (props) => {
                     },
                     body: JSON.stringify(borrow),
                 })
-            // .then((res) => res.json())
         );
     };
 

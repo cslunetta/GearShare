@@ -145,7 +145,6 @@ namespace GearShare.Repositories
                             DisplayName = reader.GetString(reader.GetOrdinal("DisplayName")),
                             CreateDateTime = reader.GetDateTime(reader.GetOrdinal("CreateDateTime")),
                             ImageLocation = DbUtils.GetNullableString(reader, "ImageLocation"),
-                            //UserTypeId = reader.GetInt32(reader.GetOrdinal("UserTypeId")),
                         };
                     }
 

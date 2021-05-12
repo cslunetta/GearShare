@@ -25,7 +25,15 @@ const UserDetail = () => {
             </Row>
             <Row>
                 <Col>
-                    <img src={user.imageLocation} alt="" />
+                    {user.imageLocation ? (
+                        <img className="detailImage" src={user.imageLocation} alt="" />
+                    ) : (
+                        <img className="detailImage"
+                            src="https://blogs.3ds.com/northamerica/wp-content/uploads/sites/4/2019/08/Robots-Square-300x300.jpg"
+                            srcSet="https://blogs.3ds.com/northamerica/wp-content/uploads/sites/4/2019/08/Robots-Square-300x300.jpg"
+                            alt=""
+                        />
+                    )}
                 </Col>
                 <Col>
                     <Row>
@@ -58,10 +66,14 @@ const UserDetail = () => {
                             <p>{user.fullName}</p>
                         </Col>
                     </Row>
-
-                    <Button onClick={() => history.push("userprofiledetails/update")}>Update</Button>
                 </Col>
             </Row>
+                    <Row>
+                        <Col></Col>
+                        <Col>
+                            <Button onClick={() => history.push("userprofiledetails/update")}>Update</Button>
+                        </Col>
+                    </Row>
         </Container>
     );
 };
