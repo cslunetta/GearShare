@@ -50,13 +50,18 @@ const UserForm = () => {
             </Row>
             <Row>
                 <Col>
+                {user.imageLocation ?
                     <img src={user.imageLocation} alt="" />
+                    :
+                    <img src={"https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg"} alt="" />
+                }
                     <Label hidden />
                     <Input
                         type="text"
                         id="imageLocation"
                         onChange={handleControlledInputChange}
                         value={user.imageLocation}
+                        placeholder="Add image URL"
                     />
                 </Col>
                 <Col>

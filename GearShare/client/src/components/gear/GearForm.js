@@ -220,7 +220,7 @@ const GearForm = () => {
                                     value={gear.imageLocation}
                                 />
                                 <FormText color="muted">
-                                    Upload a picture of your gear
+                                    Add image URL
                                 </FormText>
                             </FormGroup>
                             <Button
