@@ -1,31 +1,19 @@
 # GearShare
 
-**_GearShare_** is an app developed for
+**_GearShare_** is an app developed for musians and artists. Our goal is to help facilitate users sharing gear between each other to use for shows, studio work, etc.
 
-Logo ()
-Image of page ()
-
-## Developer Setup
-
-Instructions for running GearShare to see it for yourself and/or aid in further development
-
-### Requirements
-
--   Git
--   Visual Studio (configured to run server-side ASP.NET Web API C# code)
--   MS SQL Server (Express or higher)
--   NodeJS
-
-### Firebase
-
-You will need to create a Firebase project to have working authentication and authorization.
-
--   Go to [Firebase](https://firebase.google.com/) and create a project (can be named anything). Add authentication in the form of email/password to the project.
--   In the project settings, you will need your `Project Id` and `Web API Key`
+## Setup
 
 ### Clone the project
 
 From a terminal window, in any directory you'd like, run: `git clone git@github.com:cslunetta/GearShare.git`
+
+### Firebase
+
+Create a Firebase project to have working authentication and authorization.
+
+-   Go to [Firebase](https://firebase.google.com/) and create a project (can be named anything). Add authentication in the form of email/password to the project.
+-   In the project settings, you will need your `Project Id` and `Web API Key`
 
 ### Back-end setup
 
@@ -36,8 +24,8 @@ From a terminal window, in any directory you'd like, run: `git clone git@github.
 }
 ```
 -   From `GearShare/SQL`, run the scripts `01_Db_Create.sql` and then `02_Seed_Data` to generate the database
--   To use the default test account `test@example.com`, create a user account in your Firebase project's auth section with that email address (and any password) and replace the data in that user's `FirebaseUserId` column in the database with the id generated in your Firebase project
--   Load `GearShare.sln` in Visual Studio and hit F5 to run the server (after ensuring that GearShare is selected instead of the default IIS Express server)
+-   To access an account from the database create a user account in your Firebase project's auth section with the email address and set a password. Then replace the data in that user's `FirebaseUserId` column in the database with the id generated in your Firebase project
+-   Load `GearShare.sln` in Visual Studio and hit F5 to run the GearShare server 
 
 ### Front-end Setup
 
@@ -45,7 +33,7 @@ From a terminal window, in any directory you'd like, run: `git clone git@github.
 -   In this file, paste `REACT_APP_API_KEY=Web API Key`, replacing "Web API Key" with your unique key from your Firebase project's project settings
 -   Run `npm install --save bootstrap reactstrap` in `GearShare/client` to install all dependencies
 -   To start the development server on `localhost:3000`, run `npm start`
--   A browser window should open with the authentication page and you can enter `test@example.com` as your email address with the password you added in Firebase
+-   A browser window should open with the authentication page and you can enter the email and password you added in Firebase
 
 ---
 
@@ -58,16 +46,17 @@ From a terminal window, in any directory you'd like, run: `git clone git@github.
 
 ### Front-end
 
--   React
+-   ReactJS
 -   Firebase authentication
 -   Reactstrap
 -   Bootstrap
+-   CSS
 
 ### Back-end
 
 -   .NET 5
 -   ASP.NET Core
--   MS SQL Server
+-   Microsoft SQL Server
 
 ### Design and Development
 
