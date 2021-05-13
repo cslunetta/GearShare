@@ -1,6 +1,6 @@
 # GearShare
 
-**_GearShare_** is an app developed for musians and artists. Our goal is to help facilitate users sharing gear between each other to use for shows, studio work, etc.
+**_GearShare_** is an app developed for musicians and artists. Our goal is to help facilitate users sharing gear between each other to use for shows, studio work, etc.
 
 ## Setup
 
