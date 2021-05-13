@@ -35,7 +35,7 @@ insert into [Status] (Id, [Name]) VALUES (1, 'Approved'), (2, 'Denied'), (3, 'Ca
 set identity_insert [Status] off
 
 set identity_insert [Borrow] on
-insert into [Borrow] (Id, StatusId, UserProfileId, GearId, StartDate, EndDate) VALUES (1, null, 2, 7, GETDATE(), null);
+insert into [Borrow] (Id, StatusId, UserProfileId, GearId, StartDate, EndDate) VALUES (1, null, 3, 7, GETDATE(), null);
 insert into [Borrow] (Id, StatusId, UserProfileId, GearId, StartDate, EndDate) VALUES (2, null, 1, 7, GETDATE(), null);
 insert into [Borrow] (Id, StatusId, UserProfileId, GearId, StartDate, EndDate) VALUES (3, null, 3, 1, GETDATE(), null);
 insert into [Borrow] (Id, StatusId, UserProfileId, GearId, StartDate, EndDate) VALUES (4, null, 4, 1, GETDATE(), null);
