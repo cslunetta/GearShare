@@ -45,12 +45,12 @@ const GearForm = () => {
     };
 
     const handleSave = () => {
-        if (gear.isPublic === "a" && parseInt(gear.categoryId) === 0) {
-            window.alert("Please select a Category and Privacy Setting");
-        } else if (gear.isPublic === "a") {
-            window.alert("Please select a Privacy Setting");
+        if (gear.name === "") {
+        window.alert("Name cannot be left blank");
         } else if (parseInt(gear.categoryId) === 0) {
             window.alert("Please select a Category");
+        } else if (gear.description === "") {
+            window.alert("The discription cannot be left blank");
         } else {
             setIsLoading(true);
             if (gearId) {
