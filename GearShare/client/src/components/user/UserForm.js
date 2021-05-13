@@ -20,13 +20,22 @@ const UserForm = () => {
     };
 
     const handleSave = () => {
-        updateUserProfile({
-            displayName: user.displayName,
-            imageLocation: user.imageLocation,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            email: user.email,
-        }).then(() => history.push(`/userprofiledetails`));
+        if (user.displayName === "") {
+            window.alert("The display name cannot be left blank")
+        } else if (user.firstName === "") {
+            window.alert("Looks like you are missing your first name")
+        } else if (user.lastName === "") {
+            window.alert("Looks like you are missing your last name")
+        } else {
+
+            updateUserProfile({
+                displayName: user.displayName,
+                imageLocation: user.imageLocation,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email,
+            }).then(() => history.push(`/userprofiledetails`));
+        }
     };
 
     return (
